@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import ButtonShowcase from './layout/ButtonShowcase';
 import './index.css';
 import About from './layout/About';
+import CheckBox from './layout/CheckBox';
+import CardLayout from './layout/CardLayout';
 
 const Home: React.FC = () => (
   <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-800">
@@ -14,6 +16,12 @@ const Home: React.FC = () => (
       </Link>
       <Link to="/about" className="text-blue-500 hover:underline">
         About Page
+      </Link>
+      <Link to="/checkbox" className="text-blue-500 hover:underline">
+        checkbox
+      </Link>
+      <Link to="/card" className="text-blue-500 hover:underline">
+        card
       </Link>
     </div>
   </div>
@@ -27,6 +35,8 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/button" element={<ButtonShowcase />} />
+        <Route path="/checkbox" element={<CheckBox />} />
+        <Route path="/card" element={<CardLayout />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>

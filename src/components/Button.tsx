@@ -45,6 +45,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> & {
     className?: string; // Optional custom class names
     loading?: boolean; // Show a loading spinner
+    customSize?: string; // Custom size for dynamic classes
   };
 
 const Button: React.FC<ButtonProps> = ({ 
@@ -55,12 +56,14 @@ const Button: React.FC<ButtonProps> = ({
   disabled, 
   loading, 
   children, 
+  customSize, // New prop for dynamic custom size 
   ...props 
 }) => {
   return (
     <button
       className={twMerge(
         buttonVariants({ variant, size, block, disabled }),
+        customSize, // Apply custom size directly
         className
       )}
       disabled={disabled || loading} // Disable when loading

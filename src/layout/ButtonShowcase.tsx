@@ -48,6 +48,9 @@ const ButtonShowcase: React.FC = () => {
         <Button variant="secondary" disabled>
           Disabled Button
         </Button>
+        {/*custom size */}
+        <Button customSize="px-12 py-6 text-3xl">Custom Button</Button>
+       
       </main>
 
       {/* Footer */}
