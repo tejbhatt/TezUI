@@ -7,10 +7,10 @@ import CheckBox from './layout/CheckBox';
 import CardLayout from './layout/CardLayout';
 
 const Home: React.FC = () => (
-  <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-800">
+  <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 text-gray-800 mr-2 p-2">
     <h1 className="text-3xl font-bold mb-4">Welcome to TezUI</h1>
-    <p className="text-lg">A Small and fast frontend library for all your needs...</p>
-    <div className="mt-4">
+    <p className="text-lg">A frontend library for all your needs...</p>
+    <div className="mt-4 flex space-x-4">
       <Link to="/button" className="text-blue-500 hover:underline mr-4">
         Go to Button Showcase
       </Link>

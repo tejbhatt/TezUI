@@ -1,65 +1,53 @@
-import React from 'react';
-import Button from './../components/Button';
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import Button from "../components/Button";
 
-const ButtonShowcase: React.FC = () => {
+// ✅ Fix: Use "as const" to correctly type the variants array
+const variants = ["primary", "success", "danger", "info", "warning", "secondary", "link"] as const;
+
+const ButtonShowcase = () => {
+  const [selectedVariant, setSelectedVariant] = useState<(typeof variants)[number]>("primary");
+
   return (
-    <div className="flex flex-col min-h-screen items-center bg-gray-50">
+    <div className="min-h-screen flex flex-col items-center p-6 bg-gray-50 dark:bg-gray-900">
       {/* Header */}
-      <header className="w-full text-center bg-blue-500 text-white py-4">
-        <h1 className="text-2xl font-bold">Button Showcase</h1>
-        <p className="text-sm">Explore various button styles and variants</p>
-      </header>
+      <h1 className="text-3xl font-bold text-gray-800 dark:text-white">Button Showcase</h1>
+      <p className="text-gray-600 dark:text-gray-400">Try different styles & copy the code</p>
 
-      {/* Main Content */}
-      <main className="flex flex-col items-center gap-y-4 w-full max-w-md px-4 py-6 flex-grow">
-        {/* Primary Button */}
-        <Button variant="primary" size="md">
-          Primary Button
+      {/* Tab Navigation */}
+      <div className="mt-6 flex space-x-2">
+        {variants.map((variant) => (
+          <button
+            key={variant}
+            onClick={() => setSelectedVariant(variant)}
+            className={`px-4 py-2 text-sm font-semibold rounded-md ${
+              selectedVariant === variant
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white"
+            }`}
+          >
+            {variant}
+          </button>
+        ))}
+      </div>
+
+      {/* Animated Button Preview */}
+      <motion.div
+        key={selectedVariant}
+        initial={{ opacity: 0, y: -10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="mt-6"
+      >
+        <Button variant={selectedVariant} size="lg">
+          {selectedVariant} Button
         </Button>
+      </motion.div>
 
-        {/* Success Button */}
-        <Button variant="success" size="lg">
-          Success Button
-        </Button>
-
-        {/* Danger Button */}
-        <Button variant="danger" size="sm">
-          Danger Button
-        </Button>
-
-        {/* Loading Button */}
-        <Button variant="info" size="md" loading>
-          Info Button
-        </Button>
-
-        {/* Block Button */}
-        <Button variant="warning" block className="w-full">
-          Warning Block Button
-        </Button>
-
-        {/* Link Button */}
-        <a href="https://www.google.com" target="_blank" rel="noopener noreferrer">
-          <Button variant="link" size="sm">
-            Link Button
-          </Button>
-        </a>
-
-        {/* Disabled Button */}
-        <Button variant="secondary" disabled>
-          Disabled Button
-        </Button>
-        {/*custom size */}
-        <Button customSize="px-12 py-6 text-3xl">Custom Button</Button>
-       
-      </main>
-
-      {/* Footer */}
-      <footer className="w-full text-center bg-gray-800 text-white py-4">
-        <p className="text-sm">&copy; 2024 Button Showcase. All rights reserved.</p>
-        <p className="text-xs">
-          Crafted with <span className="text-red-500">&hearts;</span> By Tej Bhatt using React and Tailwind CSS.
-        </p>
-      </footer>
+      {/* Code Preview */}
+      <pre className="mt-6 bg-gray-100 dark:bg-gray-800 p-4 rounded-md text-sm text-gray-700 dark:text-gray-300">
+        {`<Button variant="${selectedVariant}" size="lg">Your Button Text Here</Button>`}
+      </pre>
     </div>
   );
 };
